@@ -1,0 +1,11 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.game {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr min(20px, 20rem);
+}

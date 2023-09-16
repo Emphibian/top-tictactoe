@@ -4,8 +4,26 @@
   box-sizing: border-box;
 }
 
+body {
+  max-width: 70rem;
+  min-height: 100vh;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .game {
   display: grid;
+  justify-content: center;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr min(20px, 20rem);
+}
+
+.gameboard {
+  width: min(500px, 70rem);
+  height: min(70rem, 500px);
+  background-color: #fed7a7;
+  margin: 3rem;
+  border-radius: 50px;
 }

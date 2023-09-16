@@ -27,3 +27,23 @@ body {
   margin: 3rem;
   border-radius: 50px;
 }
+
+.players {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+
+}
+
+.player {
+  background-color: #4CAAF6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  height: min(100px, 20rem);
+  width: 80%;
+  color: white;
+}

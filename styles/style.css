@@ -17,7 +17,7 @@ body {
   display: grid;
   justify-content: center;
   grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr min(20px, 20rem);
+  grid-template-rows: 1fr auto;
 }
 
 .gameboard {
@@ -34,11 +34,10 @@ body {
   justify-content: center;
   align-items: center;
   gap: 5rem;
-
 }
 
 .player {
-  background-color: #4CAAF6;
+  background-color: #4caaf6;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,4 +45,15 @@ body {
   height: min(100px, 20rem);
   width: 80%;
   color: white;
+}
+
+.game > button {
+  justify-self: center;
+  width: 30%;
+  height: 5rem;
+  border: none;
+  border-radius: 15px;
+  background-color: #b1f1ba;
+  font-size: 15px;
+  font-weight: 500;
 }

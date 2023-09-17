@@ -34,7 +34,20 @@ let gameBoard = (() => {
     );
   };
 
-  return { render, mark };
+  return {
+    render,
+    mark,
+  };
 })();
+
+function playerFactory(player, mark) {
+  return {
+    player,
+    mark,
+  };
+}
+
+let player1 = playerFactory(1, "O");
+let player2 = playerFactory(2, "X");
 
 gameBoard.render();

@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  max-width: 70rem;
+  min-height: 100vh;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr auto;
+}
+
+.gameboard {
+  width: min(500px, 70rem);
+  height: min(70rem, 500px);
+  background-color: #fed7a7;
+  margin: 3rem;
+  border-radius: 50px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+/* Remove outside borders of the gameboard */
+.gameboard div:nth-last-of-type(n+7) {
+  border-top: none;
+}
+
+.gameboard div:nth-of-type(3n-2) {
+  border-left: none;
+}
+
+.gameboard div:nth-of-type(3n) {
+  border-right: none;
+}
+
+.gameboard div:nth-of-type(n+7) {
+  border-bottom: none;
+}
+
+.game-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 42px;
+  border: 1px solid;
+}
+
+.players {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+}
+
+.player {
+  background-color: #4caaf6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  height: min(100px, 20rem);
+  width: 80%;
+  color: white;
+}
+
+.game > button {
+  justify-self: center;
+  width: 30%;
+  height: 5rem;
+  border: none;
+  border-radius: 15px;
+  background-color: #b1f1ba;
+  font-size: 15px;
+  font-weight: 500;
+}

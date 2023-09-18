@@ -7,6 +7,8 @@ let gameBoard = (() => {
     ["", "", ""],
   ];
 
+  let turn = null;
+
   let mark = (event) => {
     let column = +event.srcElement.dataset.column;
     let row = +event.srcElement.dataset.row;
@@ -34,9 +36,19 @@ let gameBoard = (() => {
     );
   };
 
+  const changeTurn = () => {
+    if (!turn) {
+      turn = player1;
+      return;
+    }
+
+    turn = turn === player1 ? player2 : player1;
+  }
+
   return {
     render,
     mark,
+    changeTurn,
   };
 })();
 
@@ -51,3 +63,4 @@ let player1 = playerFactory(1, "O");
 let player2 = playerFactory(2, "X");
 
 gameBoard.render();
+gameBoard.changeTurn();

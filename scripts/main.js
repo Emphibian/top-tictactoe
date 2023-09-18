@@ -15,6 +15,7 @@ let gameBoard = (() => {
 
     changeTurn();
     board[row][column] = turn.mark;
+    checkWin();
     render();
   };
 
@@ -43,12 +44,30 @@ let gameBoard = (() => {
     }
 
     turn = turn === player1 ? player2 : player1;
-  }
+  };
+
+  const checkWin = () => {
+    // check row, column and diagonal for a win
+    let rowWin = board.some((row) =>
+      row.every((element) => element === row[0] && element),
+    );
+    let columnWin = board[0].some((_, i) =>
+      board.every((row) => row[i] === board[0][i] && row[i]),
+    );
+    let primaryDiagonalWin = board.every(
+      (row, i) => row[i] === board[0][0] && board[0][0],
+    );
+    let secondaryDiagonalWin = board.every((row, i) => {
+      let column = row.length - i - 1;
+      return row[column] === board[0][2] && board[0][2];
+    });
+
+    return rowWin || columnWin || primaryDiagonalWin || secondaryDiagonalWin;
+  };
 
   return {
     render,
     playTurn,
-    changeTurn,
   };
 })();
 

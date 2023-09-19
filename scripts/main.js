@@ -51,7 +51,17 @@ let gameBoard = (() => {
 
     gameOverDiv.classList.add("game-over");
     gameDiv.appendChild(gameOverDiv);
-  }
+
+    window.addEventListener(
+      "mouseup",
+      (e) => {
+        if (e.target != gameOverDiv) {
+          gameDiv.removeChild(gameOverDiv);
+        }
+      },
+      { once: true },
+    );
+  };
 
   const changeTurn = () => {
     if (!turn) {

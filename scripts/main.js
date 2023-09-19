@@ -16,7 +16,7 @@ let gameBoard = (() => {
 
     changeTurn();
     board[row][column] = turn.mark;
-    checkWin();
+    if (checkWin()) declareWinner();
     render();
   };
 
@@ -31,13 +31,27 @@ let gameBoard = (() => {
         gameCellDiv.dataset.row = i;
         gameCellDiv.dataset.column = j;
 
-        if (!board[i][j])
-          gameCellDiv.addEventListener("click", playTurn);
+        if (!board[i][j]) gameCellDiv.addEventListener("click", playTurn);
 
         gameBoardDiv.appendChild(gameCellDiv);
       }),
     );
   };
+
+  const declareWinner = () => {
+    if (document.querySelector(".game-over")) {
+      return;
+    }
+
+    let gameDiv = document.querySelector(".game");
+    let gameOverDiv = document.createElement("div");
+    let heading = document.createElement("h3");
+    heading.textContent = "Game Over";
+    gameOverDiv.appendChild(heading);
+
+    gameOverDiv.classList.add("game-over");
+    gameDiv.appendChild(gameOverDiv);
+  }
 
   const changeTurn = () => {
     if (!turn) {

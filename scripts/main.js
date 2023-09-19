@@ -16,11 +16,15 @@ let gameBoard = (() => {
 
     changeTurn();
     board[row][column] = turn.mark;
-    if (checkWin()) declareWinner();
-    render();
+    if (checkWin()) {
+      declareWinner();
+      render(true);
+    } else {
+      render();
+    }
   };
 
-  const render = () => {
+  const render = (won = false) => {
     gameBoardDiv.innerHTML = "";
 
     board.forEach((row, i) =>
@@ -31,7 +35,8 @@ let gameBoard = (() => {
         gameCellDiv.dataset.row = i;
         gameCellDiv.dataset.column = j;
 
-        if (!board[i][j]) gameCellDiv.addEventListener("click", playTurn);
+        if (!board[i][j] && !won)
+          gameCellDiv.addEventListener("click", playTurn);
 
         gameBoardDiv.appendChild(gameCellDiv);
       }),

@@ -31,7 +31,8 @@ let gameBoard = (() => {
         gameCellDiv.dataset.row = i;
         gameCellDiv.dataset.column = j;
 
-        gameCellDiv.addEventListener("click", playTurn);
+        if (!board[i][j])
+          gameCellDiv.addEventListener("click", playTurn);
 
         gameBoardDiv.appendChild(gameCellDiv);
       }),

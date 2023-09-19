@@ -1,4 +1,5 @@
 let gameBoardDiv = document.querySelector(".gameboard");
+let newBtn = document.querySelector("#new-button");
 
 let gameBoard = (() => {
   let board = [
@@ -9,7 +10,7 @@ let gameBoard = (() => {
 
   let turn = null;
 
-  let playTurn = (event) => {
+  const playTurn = (event) => {
     let column = +event.srcElement.dataset.column;
     let row = +event.srcElement.dataset.row;
 
@@ -19,7 +20,7 @@ let gameBoard = (() => {
     render();
   };
 
-  let render = () => {
+  const render = () => {
     gameBoardDiv.innerHTML = "";
 
     board.forEach((row, i) =>
@@ -65,9 +66,22 @@ let gameBoard = (() => {
     return rowWin || columnWin || primaryDiagonalWin || secondaryDiagonalWin;
   };
 
+  const reset = () => {
+    board = [
+      ["", "", ""],
+      ["", "", ""],
+      ["", "", ""],
+    ];
+
+    turn = null;
+    changeTurn();
+    render();
+  };
+
   return {
     render,
     playTurn,
+    reset,
   };
 })();
 
@@ -80,5 +94,9 @@ function playerFactory(player, mark) {
 
 let player1 = playerFactory(1, "O");
 let player2 = playerFactory(2, "X");
+
+newBtn.addEventListener("click", () => {
+  gameBoard.reset();
+});
 
 gameBoard.render();

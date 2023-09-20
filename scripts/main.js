@@ -16,15 +16,18 @@ let gameBoard = (() => {
 
     changeTurn();
     board[row][column] = turn.mark;
-    if (checkWin() || checkDraw()) {
+    if (checkWin()) {
       declareWinner();
+      render(true);
+    } else if (checkDraw()) {
+      declareWinner("draw");
       render(true);
     } else {
       render();
     }
   };
 
-  const render = (won = false) => {
+  const render = (gameOver = false) => {
     gameBoardDiv.innerHTML = "";
 
     board.forEach((row, i) =>
@@ -35,7 +38,7 @@ let gameBoard = (() => {
         gameCellDiv.dataset.row = i;
         gameCellDiv.dataset.column = j;
 
-        if (!board[i][j] && !won)
+        if (!board[i][j] && !gameOver)
           gameCellDiv.addEventListener("click", playTurn);
 
         gameBoardDiv.appendChild(gameCellDiv);
@@ -43,7 +46,7 @@ let gameBoard = (() => {
     );
   };
 
-  const declareWinner = () => {
+  const declareWinner = (type) => {
     if (document.querySelector(".game-over")) {
       return;
     }
@@ -51,7 +54,7 @@ let gameBoard = (() => {
     let gameDiv = document.querySelector(".game");
     let gameOverDiv = document.createElement("div");
     let heading = document.createElement("h3");
-    heading.textContent = "Game Over";
+    heading.textContent = type === "draw" ? "Game Drawn" : "Won";
     gameOverDiv.appendChild(heading);
 
     gameOverDiv.classList.add("game-over");

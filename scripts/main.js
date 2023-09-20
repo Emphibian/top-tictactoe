@@ -16,7 +16,7 @@ let gameBoard = (() => {
 
     changeTurn();
     board[row][column] = turn.mark;
-    if (checkWin()) {
+    if (checkWin() || checkDraw()) {
       declareWinner();
       render(true);
     } else {
@@ -94,6 +94,11 @@ let gameBoard = (() => {
     });
 
     return rowWin || columnWin || primaryDiagonalWin || secondaryDiagonalWin;
+  };
+
+  const checkDraw = () => {
+    let notDraw = board.some((row) => row.some((element) => element === ""));
+    return !notDraw;
   };
 
   const reset = () => {

@@ -16,8 +16,9 @@ let gameBoard = (() => {
 
     changeTurn();
     board[row][column] = turn.mark;
+
     if (checkWin()) {
-      declareWinner();
+      declareWinner("win");
       render(true);
     } else if (checkDraw()) {
       declareWinner("draw");
@@ -57,18 +58,23 @@ let gameBoard = (() => {
     heading.textContent = type === "draw" ? "Game Drawn" : "Won";
     gameOverDiv.appendChild(heading);
 
+    let playAgainBtn = document.createElement("button");
+    playAgainBtn.addEventListener("click", () => {
+      reset();
+      gameDiv.removeChild(gameOverDiv);
+    });
+    playAgainBtn.textContent = "Play Again";
+    gameOverDiv.appendChild(playAgainBtn);
+
     gameOverDiv.classList.add("game-over");
     gameDiv.appendChild(gameOverDiv);
 
-    window.addEventListener(
-      "mouseup",
-      (e) => {
-        if (e.target != gameOverDiv) {
-          gameDiv.removeChild(gameOverDiv);
-        }
-      },
-      { once: true },
-    );
+    window.addEventListener("mouseup", (e) => {
+      if (e.target != gameOverDiv && e.target.parentNode != gameOverDiv) {
+        console.log(gameOverDiv);
+        gameDiv.removeChild(gameOverDiv);
+      }
+    });
   };
 
   const changeTurn = () => {

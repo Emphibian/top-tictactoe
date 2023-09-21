@@ -19,7 +19,6 @@ let gameBoard = (() => {
 
     let winner = checkWin();
     if (winner) {
-      console.log({ winner });
       declareWinner("win");
       render(true);
     } else if (checkDraw()) {
@@ -54,6 +53,7 @@ let gameBoard = (() => {
       return;
     }
 
+    let gameDiv = document.querySelector(".game");
     let gameOverDiv = document.createElement("div");
     gameOverDiv.classList.add("game-over");
 
@@ -61,23 +61,27 @@ let gameBoard = (() => {
     heading.textContent = type === "draw" ? "Game Drawn" : "Won";
     gameOverDiv.appendChild(heading);
 
+    let controller = new AbortController();
+    window.addEventListener(
+      "mouseup",
+      (e) => {
+        if (e.target != gameOverDiv && e.target.parentNode != gameOverDiv) {
+          gameDiv.removeChild(gameOverDiv);
+          controller.abort();
+        }
+      },
+      { signal: controller.signal },
+    );
+
     let playAgainBtn = document.createElement("button");
     playAgainBtn.addEventListener("click", () => {
       reset();
       gameDiv.removeChild(gameOverDiv);
+      controller.abort();
     });
     playAgainBtn.textContent = "Play Again";
     gameOverDiv.appendChild(playAgainBtn);
-
-    let gameDiv = document.querySelector(".game");
     gameDiv.appendChild(gameOverDiv);
-
-    window.addEventListener("mouseup", (e) => {
-      if (e.target != gameOverDiv && e.target.parentNode != gameOverDiv) {
-        console.log(gameOverDiv);
-        gameDiv.removeChild(gameOverDiv);
-      }
-    });
   };
 
   const changeTurn = () => {

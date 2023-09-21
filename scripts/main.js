@@ -17,7 +17,9 @@ let gameBoard = (() => {
     changeTurn();
     board[row][column] = turn.mark;
 
-    if (checkWin()) {
+    let winner = checkWin();
+    if (winner) {
+      console.log({ winner });
       declareWinner("win");
       render(true);
     } else if (checkDraw()) {
@@ -52,8 +54,9 @@ let gameBoard = (() => {
       return;
     }
 
-    let gameDiv = document.querySelector(".game");
     let gameOverDiv = document.createElement("div");
+    gameOverDiv.classList.add("game-over");
+
     let heading = document.createElement("h3");
     heading.textContent = type === "draw" ? "Game Drawn" : "Won";
     gameOverDiv.appendChild(heading);
@@ -66,7 +69,7 @@ let gameBoard = (() => {
     playAgainBtn.textContent = "Play Again";
     gameOverDiv.appendChild(playAgainBtn);
 
-    gameOverDiv.classList.add("game-over");
+    let gameDiv = document.querySelector(".game");
     gameDiv.appendChild(gameOverDiv);
 
     window.addEventListener("mouseup", (e) => {
@@ -88,21 +91,40 @@ let gameBoard = (() => {
 
   const checkWin = () => {
     // check row, column and diagonal for a win
-    let rowWin = board.some((row) =>
-      row.every((element) => element === row[0] && element),
-    );
-    let columnWin = board[0].some((_, i) =>
-      board.every((row) => row[i] === board[0][i] && row[i]),
-    );
+    let winningMark;
+    let win;
+    board.some((row) => {
+      let rowWin = row.every((element) => element === row[0] && element);
+      if (rowWin) {
+        winningMark = row[0];
+        return true;
+      }
+    });
+
+    board[0].some((_, i) => {
+      let columnWin = board.every((row) => row[i] === board[0][i] && row[i]);
+      if (columnWin) {
+        winningMark = board[0][i];
+        return true;
+      }
+    });
+
     let primaryDiagonalWin = board.every(
       (row, i) => row[i] === board[0][0] && board[0][0],
     );
+    if (primaryDiagonalWin) {
+      winningMark = board[0][0];
+    }
+
     let secondaryDiagonalWin = board.every((row, i) => {
       let column = row.length - i - 1;
       return row[column] === board[0][2] && board[0][2];
     });
+    if (secondaryDiagonalWin) {
+      winningMark = board[0][2];
+    }
 
-    return rowWin || columnWin || primaryDiagonalWin || secondaryDiagonalWin;
+    return winningMark;
   };
 
   const checkDraw = () => {

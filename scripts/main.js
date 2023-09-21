@@ -17,9 +17,10 @@ let gameBoard = (() => {
     changeTurn();
     board[row][column] = turn.mark;
 
-    let winner = checkWin();
-    if (winner) {
-      declareWinner("win");
+    let winningMark = checkWin();
+    if (winningMark) {
+      let winner = (player1.mark === winningMark ? player1 : player2);
+      declareWinner("win", winner);
       render(true);
     } else if (checkDraw()) {
       declareWinner("draw");
@@ -48,7 +49,7 @@ let gameBoard = (() => {
     );
   };
 
-  const declareWinner = (type) => {
+  const declareWinner = (type, winner = null) => {
     if (document.querySelector(".game-over")) {
       return;
     }
@@ -58,7 +59,11 @@ let gameBoard = (() => {
     gameOverDiv.classList.add("game-over");
 
     let heading = document.createElement("h3");
-    heading.textContent = type === "draw" ? "Game Drawn" : "Won";
+    if (type === "win") {
+      heading.textContent = `Game won by ${winner.name}`;
+    } else {
+      heading.textContent = "Game draw";
+    }
     gameOverDiv.appendChild(heading);
 
     let controller = new AbortController();
@@ -155,15 +160,15 @@ let gameBoard = (() => {
   };
 })();
 
-function playerFactory(player, mark) {
+function playerFactory(name, mark) {
   return {
-    player,
+    name,
     mark,
   };
 }
 
-let player1 = playerFactory(1, "O");
-let player2 = playerFactory(2, "X");
+let player1 = playerFactory("Player 1", "O");
+let player2 = playerFactory("Player 2", "X");
 
 newBtn.addEventListener("click", () => {
   gameBoard.reset();

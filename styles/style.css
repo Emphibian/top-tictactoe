@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Virgil;
+  src: url("../fonts/Virgil.woff2");
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -27,7 +32,7 @@ body {
   background-color: #fed7a7;
   margin: 3rem;
   border-radius: 50px;
-
+  font-family: Virgil, sans-serif;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
@@ -54,7 +59,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 42px;
+  font-size: 6rem;
   border: 1px solid;
 }
 

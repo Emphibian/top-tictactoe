@@ -82,7 +82,7 @@ body {
   color: white;
 }
 
-.game > button {
+#new-button {
   justify-self: center;
   width: 30%;
   height: 5rem;
@@ -91,6 +91,14 @@ body {
   background-color: #b1f1ba;
   font-size: 15px;
   font-weight: 500;
+}
+
+#new-button:hover {
+  background-color: #acebb5;
+}
+
+#new-button:active {
+  background-color: #a8e6b1;
 }
 
 .game-over {
@@ -115,7 +123,7 @@ body {
 
 .game-over button {
   padding: 0.5rem;
-  background-color: #3C3A38;
+  background-color: #3c3a38;
   border: none;
   color: white;
   border-radius: 3px;

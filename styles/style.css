@@ -82,6 +82,10 @@ body {
   color: white;
 }
 
+.selected {
+  background-color: #3b84bf;
+}
+
 #new-button {
   justify-self: center;
   width: 30%;

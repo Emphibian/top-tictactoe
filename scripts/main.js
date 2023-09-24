@@ -19,7 +19,7 @@ let gameBoard = (() => {
 
     let winningMark = checkWin();
     if (winningMark) {
-      let winner = (player1.mark === winningMark ? player1 : player2);
+      let winner = player1.mark === winningMark ? player1 : player2;
       declareWinner("win", winner);
       render(true);
     } else if (checkDraw()) {
@@ -90,12 +90,15 @@ let gameBoard = (() => {
   };
 
   const changeTurn = () => {
+    turn?.renderPlayer(true);
     if (!turn) {
       turn = player1;
+      turn.renderPlayer(false);
       return;
     }
 
     turn = turn === player1 ? player2 : player1;
+    turn.renderPlayer(false);
   };
 
   const checkWin = () => {
@@ -161,14 +164,23 @@ let gameBoard = (() => {
 })();
 
 function playerFactory(name, mark) {
+  const renderPlayer = (turn) => {
+    let playerDiv = document.querySelector(`#${name}`);
+    if (turn) {
+      playerDiv.classList.add("selected");
+      return;
+    }
+    playerDiv.classList.remove("selected");
+  };
   return {
     name,
     mark,
+    renderPlayer,
   };
 }
 
-let player1 = playerFactory("Player 1", "O");
-let player2 = playerFactory("Player 2", "X");
+let player1 = playerFactory("Player1", "O");
+let player2 = playerFactory("Player2", "X");
 
 newBtn.addEventListener("click", () => {
   gameBoard.reset();

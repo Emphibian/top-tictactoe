@@ -101,14 +101,16 @@ body {
   background-color: #b1f1ba;
   font-size: 15px;
   font-weight: 500;
+  transition: all ease 0.2s;
 }
 
 #new-button:hover {
-  background-color: #acebb5;
+  background-color: #a8e6b1;
+  transform: translateY(-2px);
 }
 
 #new-button:active {
-  background-color: #a8e6b1;
+  background-color: #9ed9a7;
 }
 
 .game-over {

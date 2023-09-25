@@ -138,4 +138,10 @@ body {
   color: white;
   border-radius: 3px;
   font-weight: 500;
+  transition: all ease 0.2s;
+}
+
+.game-over button:hover {
+  transform: translateY(-1px);
+  background-color: #4d4a47;
 }

@@ -14,8 +14,8 @@ let gameBoard = (() => {
     let column = +event.srcElement.dataset.column;
     let row = +event.srcElement.dataset.row;
 
-    changeTurn();
     board[row][column] = turn.mark;
+    changeTurn();
 
     let winningMark = checkWin();
     if (winningMark) {
@@ -90,6 +90,7 @@ let gameBoard = (() => {
   };
 
   const changeTurn = () => {
+    console.log("called");
     turn?.renderPlayer(true);
     if (!turn) {
       turn = player1;

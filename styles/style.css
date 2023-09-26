@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Virgil;
+  src: url("../fonts/Virgil.woff2");
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -25,9 +30,10 @@ body {
   width: min(500px, 70rem);
   height: min(70rem, 500px);
   background-color: #fed7a7;
+  border: 3px solid;
   margin: 3rem;
   border-radius: 50px;
-
+  font-family: Virgil, sans-serif;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
@@ -54,7 +60,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 42px;
+  font-size: 6rem;
   border: 1px solid;
 }
 
@@ -75,9 +81,18 @@ body {
   height: min(100px, 20rem);
   width: 80%;
   color: white;
+  box-shadow:
+    0px 0px 0px 2px rgba(0, 0, 0, 0.5),
+    0px 2px 4px rgba(0, 0, 0, 0.1),
+    0px 4px 8px rgba(0, 0, 0, 0.1),
+    0px 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-.game > button {
+.selected {
+  background-color: #3b84bf;
+}
+
+#new-button {
   justify-self: center;
   width: 30%;
   height: 5rem;
@@ -86,6 +101,17 @@ body {
   background-color: #b1f1ba;
   font-size: 15px;
   font-weight: 500;
+  transition: all ease 0.2s;
+  box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+#new-button:hover {
+  background-color: #a8e6b1;
+  transform: translateY(-2px);
+}
+
+#new-button:active {
+  background-color: #9ed9a7;
 }
 
 .game-over {
@@ -110,9 +136,15 @@ body {
 
 .game-over button {
   padding: 0.5rem;
-  background-color: #3C3A38;
+  background-color: #3c3a38;
   border: none;
   color: white;
   border-radius: 3px;
   font-weight: 500;
+  transition: all ease 0.2s;
+}
+
+.game-over button:hover {
+  transform: translateY(-1px);
+  background-color: #4d4a47;
 }
